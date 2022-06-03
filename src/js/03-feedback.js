@@ -1,16 +1,13 @@
 import throttle from "lodash.throttle";
 
 
-const refs = {
-    form: document.querySelector('.feedback-form'),
-}
 
 const form = document.querySelector('form.feedback-form');
 const emaiIinput = document.querySelector('input[name="email"]');
 const textarea = document.querySelector('textarea[name="message"]');
 
 const STORAGE_KEY = 'feedback-form-state';
-const formData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+
 
 
 form.addEventListener('input', throttle(onFormText, 500));
@@ -20,13 +17,13 @@ onPlaceTextForm();
 function onFormText(evt) {
     // console.log(formData);
     const formData = { email: emaiIinput.value, message: textarea.value, }
-
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 };
 
 
 function onFormSubmit(evt) {
     evt.preventDefault();
+    const formData = { email: emaiIinput.value, message: textarea.value, }
     console.log(formData);
     form.reset();
     localStorage.removeItem(STORAGE_KEY);
